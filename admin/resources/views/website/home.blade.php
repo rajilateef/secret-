@@ -2,6 +2,15 @@
 @section('content')
 <section>
 		<div class="container h-100">
+            @if ( session('error'))
+
+                <div class="alert alert-danger">
+
+                    {{ session('error') }}
+
+                </div>
+
+            @endif
 			<div class="row align-items-center h-100">
 				<div class="col-sm-8 col-md-6 col-lg-4 mx-auto">
           <div class="card">

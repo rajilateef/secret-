@@ -1,37 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\User;
-use admin;
-namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 class loginController extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('website.home');
     }
+
     public function postLogin(Request $request){
-       admin::authenticate($request->all());
-        return admin::check();
-    }
-    
-        /**
-         * Handle an authentication attempt.
-         *
-         * @return Response
-         */
-    public function authenticate()
-        {
-            if (Auth::attempt(['email' => $email, 'password' => $password])) {
-                // Authentication passed...
-                if(Auth::user()->suspended){
-                    return ('account-suspended');
-                }
-                return redirect()->intended('dashboard');
-            }
+
+        $this->validate($request, [
+
+            'email' => 'required|email',
+
+            'password' => 'required',
+
+        ]);
+
+        if (Auth::attempt([
+
+            'email' => $request->email,
+
+            'password' => $request->password])
+
+        ){
+
+            return redirect('/dash');
+
         }
+
+        return redirect('/login')->with('error', 'Invalid Email address or Password');
+
     }
+}
 
 
