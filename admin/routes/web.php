@@ -25,7 +25,7 @@ Route::get('signup', 'WebsiteController@signup')->name('');
 Route::get('dash', 'WebsiteController@dash')->name('dash');
 Route::get('forgot_password','WebsiteController@forgot_password')->name('');
 Route::get('/signup', 'RegisterController@create');
-Route::post('/signup', 'RegisterController@postRegister');
+Route::post('/signup', 'RegisterController@store');
 Route::get('/logout', 'SessionsController@destroy');
 Route::get('/login', 'loginController@login');
 Route::post('/login', 'loginController@postLogin');
